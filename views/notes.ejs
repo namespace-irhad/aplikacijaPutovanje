@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Note Keeping</title>
+    <link rel="stylesheet" href='/stylesheets/style.css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<body>
+    <h1><%=naslov%></h1>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Note</th>
+            <th>Date</th>
+        </tr>
+        <%notes.forEach(note => {%>
+            <%var dan = note.date_posted.getUTCDate() + 1%>
+            <%var mjesec = note.date_posted.getUTCMonth() + 1%>
+            <%var godina = note.date_posted.getUTCFullYear()%>
+        <tr>
+            <td><%=note.id%></td>
+            <td><%=note.notes%></td>
+            <td><%=dan + " / " + mjesec + " / " + godina%></td>
+        </tr>
+          <%})%>
+    </table>
+
+    <form action="/notes" method="post">
+        <button name="info" class="btn btn-dark" value="1">Više Informacija</button>
+        <button name="info" class="btn btn-dark" value="0">Brisat Note</button>
+    </form>
+
+    <h1>Forma za Unos</h1>
+    <form action="/notes" method="post">
+            <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Note</label>
+                <div class="col-sm-10">
+                    <textarea name="noteField" placeholder="Unesi Note" style="width: 400px;margin-top: 0px;margin-bottom: 0px;height: 159px;"></textarea>
+                </div>
+            </div>
+            <fieldset class="form-group">
+                <div class="row">
+                    <legend class="col-form-label col-sm-2 pt-0">Prioritet</legend>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="prioritet" id="gridRadios1" value="1" checked>
+                            <label class="form-check-label" for="gridRadios1">
+                                1
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="prioritet" id="gridRadios1" value="2" >
+                            <label class="form-check-label" for="gridRadios1">
+                                2
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="prioritet" id="gridRadios1" value="3" >
+                            <label class="form-check-label" for="gridRadios1">
+                                3
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="prioritet" id="gridRadios1" value="4" >
+                            <label class="form-check-label" for="gridRadios1">
+                                4
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="prioritet" id="gridRadios1" value="5" >
+                            <label class="form-check-label" for="gridRadios1">
+                                5
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Upiši</button>
+                </div>
+            </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Delete Note</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Note</th>
+        <th>Date</th>
+        <th><strong>Brisat</strong></th>
+    </tr>
+    <%notes.forEach(note => {%>
+        <%var dan = note.date_posted.getUTCDate() + 1%>
+        <%var mjesec = note.date_posted.getUTCMonth() + 1%>
+        <%var godina = note.date_posted.getUTCFullYear()%>
+        <tr>
+            <td><%=note.id%></td>
+            <td><%=note.notes%></td>
+            <td><%=dan + " / " + mjesec + " / " + godina%></td>
+            <form action="/redirect/brisat" method="post">
+            <td>
+                <button class="btn btn-outline-info" name="zaBrisat" value="<%=note.id%>">Obriši</button>
+            </td>
+            </form>
+        </tr>
+    <%})%>
+</table>
+
+</body>
+</html>

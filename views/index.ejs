@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  </head>
+  <body>
+    <% include partials/welcome.ejs%>
+    <h1><%= title %></h1>
+    <form action="/redirect" method="post">
+        <button class="btn btn-outline-primary" value="1">Note Aplikacija</button>
+    </form>
+    <table>
+      <tr>
+        <th>Naziv</th>
+        <th>Opis</th>
+        <th>Prioritet</th>
+        <th>Opcije</th>
+      </tr>
+      <% for (let i = 0; i < putovanjeTabela.length; i++) { %>
+        <tr>
+          <%if (putovanjeTabela[i].spakovat == true) {%>
+            <td><s><a href="<%= '/' + putovanjeTabela[i].id%>"><%= putovanjeTabela[i].naziv %></a></s></td>
+            <td><s><%= putovanjeTabela[i].opis %></s></td>
+            <td><s><%= putovanjeTabela[i].prioritet %></s></td>
+            <%} else {%>
+              <td><a href="<%= '/' + putovanjeTabela[i].id%>"><%= putovanjeTabela[i].naziv %></a></td>
+              <td><%= putovanjeTabela[i].opis %></td>
+              <td><%= putovanjeTabela[i].prioritet %></td>
+            <%}%>
+            <form action="/" method="post">
+          <td>
+            <button name="dugme1" class="btn btn-primary" value="<%=putovanjeTabela[i].id%>">Obrisat</button>
+            <%if (putovanjeTabela[i].spakovat == true) {%>
+            <button name="dugme2" class="btn btn-primary" value="<%=putovanjeTabela[i].id%>">Odpakovati</button>
+            <%} else{%>
+            <button name="dugme2" class="btn btn-primary" value="<%=putovanjeTabela[i].id%>">Spakovati</button>
+            <%}%>
+            <input type="hidden" name="dugme2" value="<%=putovanjeTabela[i].spakovat%>">
+          </td>
+          </form>
+        </tr>
+      <%}%>
+    </table>
+<br><br>
+    <h1>Forma za Unos</h1>
+    <form action="/" method="post">
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Naziv</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" name="naziv" placeholder="Sta ces ponijeti?" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlSelect2">Prioritet</label>
+        <select class="form-control" name="prioritet" id="exampleFormControlSelect2">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlSelect2">Spakovano</label>
+        <select class="form-control" name="spakovat" id="exampleFormControlSelect2" >
+          <option>Da</option>
+          <option selected>Ne</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Opis</label>
+        <textarea class="form-control" name="opis" id="exampleFormControlTextarea1" rows="3"></textarea>
+      </div>
+      <input type="submit" class="btn btn-info" value="Posalji">
+    </form>
+
+  </body>
+</html>

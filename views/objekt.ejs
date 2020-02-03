@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title><%=naziv%></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+    <h1>Objekat <%=naziv%></h1>
+    <table>
+        <%for(let i = 0; i < ime.length; i++) {%>
+        <tr>
+            <th>Naziv</th>
+            <th>Opis</th>
+            <th>Prioritet</th>
+            <th>Vrijeme Unosa</th>
+        </tr>
+        <tr>
+            <%let godina = null%>
+            <%let mjesec = null%>
+            <%let dan = null%>
+            <%if (ime[i].created_on) {%>
+            <%godina = ime[i].created_on.getUTCFullYear()%>
+            <%mjesec = ime[i].created_on.getUTCMonth() + 1%>
+            <%dan = ime[i].created_on.getUTCDate()%>
+                <%}%>
+            <td><%=ime[i].naziv%></td>
+            <td><%=ime[i].opis%></td>
+            <td><%=ime[i].prioritet%></td>
+            <%if (godina == null) {%>
+            <td><%="Nije Unešeno"%></td>
+            <%} else {%>
+            <td><%=dan + " / " + mjesec+ " / " + godina%></td>
+            <%}%>
+
+        </tr>
+        <%}%>
+    </table>
+</body>
+</html>
